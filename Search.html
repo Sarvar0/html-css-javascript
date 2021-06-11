@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&amp;display=swap" rel="stylesheet">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="sha384-wESLQ85D6gbsF459vf1CiZ2+rr+CsxRY0RpiF1tLlQpDnAgg6rwdsUF1+Ics2bni" crossorigin="anonymous">
+    <style>
+       
+       *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins",sans-serif;
+        }
+        body{
+            display: grid;
+            height: 100vh;
+            place-items: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url(https://i.pinimg.com/originals/0e/9e/88/0e9e8812f01f82650833264673bf51ed.jpg);
+            background-color: #011aff;
+        }
+        .search-box{
+            height: 60px;
+            width: 60px;
+            position: relative;
+            transition: all .5s cubic-bezier(0.68, -0.55, 0.256, 1.55);
+        }
+        .search-box.active{
+            width: 350px;
+        }
+        .search-box input{
+            border: none;
+            height: 100%;
+            width: 100%;
+            outline: none;
+            background: rgba(255, 255, 255, 0.322);
+            font-size: 20px;
+            border-bottom: 1px solid #011aff;
+            padding: 0 60px 0 20px;
+            font-weight: 500;
+            color: #011aff;
+            opacity: 0;
+        }
+        .search-box input.active{
+            opacity: 1;
+        }
+        .search-box .search-button{
+            position: absolute;
+            top: 50%;
+            right: 0;
+            z-index: 1;
+            transform: translateY(-50%);
+            height: 60px;
+            width: 60px;
+            color: #011aff;
+            background: rgb(255, 217, 0);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .5s cubic-bezier(0.68, -0.55, 0.256, 1.55);
+        }
+        .search-box .search-button.active{
+            right: 5px;
+            height: 50px;
+            width: 50px;
+            color: #011aff;
+            background: rgb(255, 217, 0);
+            font-size: 20px;
+            transform: translateY(-50%) rotate(360deg);
+        }
+        .search-box .cancel-button{
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            color: #011aff;
+            font-size: 25px;
+            cursor: pointer;
+            transition: all .5s .2s cubic-bezier(0.68, -0.55, 0.256, 1.55);
+        }
+        .search-box .cancel-button.active{
+            right: -40px;
+            transform: translateY(-50%) rotate(360deg);
+        }
+        .search-box .search-data{
+            text-align: center;
+            padding-top: 5px;
+            color: #011aff;
+            font-size: 18px;
+            word-wrap: break-word;
+        }
+        .search-box .search-data.active{
+            display: none;
+        }
+        #Name{
+            position: fixed;
+            text-align: center;
+            bottom: 5%;
+            width: 100%;
+            font-size: 25px;
+        }
+        @media only screen and (max-width: 768px) {
+            .search-box.active{
+            width: 300px;
+        }
+        }
+        
+    </style>
+</head>
+<body>
+     <div class="search-box">
+        <input type="text" placeholder="Type to search...">
+        <div class="search-button">
+            <i class="bx bx-search"></i>
+        </div>
+        <div class="cancel-button">
+            <i class="bx bx-x"></i>
+        </div>
+        <div class="search-data"></div>
+    </div>
+       
+
+
+<script>
+   
+   
+   const searchBtn = document.querySelector(".search-button");
+        const cancelBtn = document.querySelector(".cancel-button");
+        const searchBox = document.querySelector(".search-box");
+        const searchInput = document.querySelector("input");
+        const searchData = document.querySelector(".search-data");
+
+        searchBtn.onclick = () =>{
+            searchBox.classList.add("active"); 
+            searchInput.classList.add("active");
+            searchBtn.classList.add("active");
+            cancelBtn.classList.add("active");
+
+            if(searchInput.value != ""){
+                let values = searchInput.value;
+                searchData.classList.remove("active");
+                searchData.innerHTML = "Вы только что набрали " + "<span style='font-weight: 700; color: #011aff; font-size: 22px;'>" + values + "</span>";
+            } else{
+                searchData.innerHTML = "";
+            }
+        }
+
+        cancelBtn.onclick = () =>{
+            searchBox.classList.remove("active");
+            searchInput.classList.remove("active");
+            searchBtn.classList.remove("active");
+            cancelBtn.classList.remove("active");
+            searchData.classList.add("active");
+            searchInput.value = "";
+        }
+    
+</script>
+</body>
+</html>
